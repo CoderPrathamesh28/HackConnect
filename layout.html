@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackConnect - The Modern Hackathon Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="{{ url_for('index') }}"><i class="fa-solid fa-code"></i> HackConnect</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('hackathons_list') }}">Hackathons</a></li>
+            <li><a href="{{ url_for('leaderboard') }}">Leaderboard</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+        <div class="nav-user">
+            {% if g.user %}
+                <a href="{{ url_for('dashboard') }}" class="nav-links-link"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
+                <a href="{{ url_for('profile') }}" class="nav-links-link"><i class="fa-solid fa-user"></i> {{ g.user.name }}</a>
+                {% if g.user.role in ['admin', 'organizer'] %}
+                    <a href="{{ url_for('admin') }}" class="nav-links-link"><i class="fa-solid fa-gauge"></i> Admin</a>
+                {% endif %}
+                <a href="{{ url_for('logout') }}" class="btn" style="background:var(--border-color); color:var(--text-color);">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="nav-links-link">Login</a>
+                <a href="{{ url_for('register') }}" class="btn btn-primary" style="width:auto;">Sign Up</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="container fade-in">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="toast-container" id="toastContainer">
+                {% for category, message in messages %}
+                    <div class="toast {{ category }}">
+                        <span>{{ message }}</span>
+                        <button class="close-btn" onclick="this.parentElement.remove()">&times;</button>
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 HackConnect. Empowering builders worldwide.</p>
+    </footer>
+
+    <script>
+        // Auto-dismiss toasts after 5 seconds
+        setTimeout(() => {
+            const toasts = document.querySelectorAll('.toast');
+            toasts.forEach(t => {
+                t.style.opacity = '0';
+                setTimeout(() => t.remove(), 300);
+            });
+        }, 5000);
+    </script>
+</body>
+</html>
