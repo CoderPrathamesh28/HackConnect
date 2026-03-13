@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div style="margin-top: 2rem; margin-bottom: 2rem;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Welcome back, {{ g.user.name }}! 👋</h1>
+    <p style="color: var(--text-muted); margin-bottom: 2rem;">Here's an overview of your hackathon activities.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        
+        <!-- Participant Section -->
+        <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem;">
+            <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;"><i class="fa-solid fa-users-viewfinder" style="margin-right:0.5rem; color: var(--primary-color);"></i> My Teams & Projects</h2>
+            
+            {% if joined_teams %}
+                <ul style="list-style: none;">
+                    {% for team in joined_teams %}
+                        <li style="background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h4 style="margin-bottom: 0.25rem;">{{ team.team_name }}</h4>
+                                <p style="font-size: 0.85rem; color: var(--text-muted);">{{ team.hackathon_title }}</p>
+                            </div>
+                            <a href="{{ url_for('team_detail', team_id=team.team_id) }}" class="btn btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; width:auto;">View Team</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div style="text-align: center; padding: 2rem 0; color: var(--text-muted);">
+                    <i class="fa-solid fa-folder-open" style="font-size: 2rem; margin-bottom: 1rem; display: block; opacity: 0.5;"></i>
+                    <p>You haven't joined any teams yet.</p>
+                    <a href="{{ url_for('hackathons_list') }}" class="btn btn-gradient mt-4">Find a Hackathon</a>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Organizer Section -->
+        {% if g.user.role in ['organizer', 'admin'] %}
+        <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+                <h2 style="font-size: 1.5rem;"><i class="fa-solid fa-gauge" style="margin-right:0.5rem; color: var(--gradient-end);"></i> Organizer Hub</h2>
+                <a href="{{ url_for('create_hackathon') }}" class="btn btn-gradient" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; width:auto;"><i class="fa-solid fa-plus"></i> New</a>
+            </div>
+            
+            {% if organized_hackathons %}
+                <ul style="list-style: none;">
+                    {% for hc in organized_hackathons %}
+                        <li style="background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                            <h4 style="margin-bottom: 0.25rem;">{{ hc.title }}</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Status: <span style="color: var(--secondary-color);">{{ hc.status }}</span></p>
+                            <a href="{{ url_for('hackathon_detail', id=hc.id) }}" class="btn" style="background: var(--border-color); color: var(--text-color); padding: 0.3rem 0.6rem; font-size: 0.8rem; width:auto;">View</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div style="text-align: center; padding: 2rem 0; color: var(--text-muted);">
+                    <p>You haven't created any hackathons yet.</p>
+                </div>
+            {% endif %}
+        </div>
+        {% endif %}
+        
+    </div>
+</div>
+{% endblock %}
