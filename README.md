@@ -25,5 +25,5 @@ Follow these steps to set up the project locally:
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/your-username/hackconnect.git](https://github.com/your-username/hackconnect.git)
+git clone [https://github.com/CoderPrathamesh28/hackconnect.git](https://github.com/CoderPrathamesh28/hackconnect.git)
 cd hackconnect
