@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div style="margin-top: 2rem;">
+    <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; margin-bottom: 2rem;">
+        <div style="height: 250px; background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)); display: flex; align-items: flex-end; padding: 2rem;">
+            <div>
+                <span style="background: rgba(0,0,0,0.5); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; margin-bottom: 1rem; display: inline-block;">{{ hackathon.status }}</span>
+                <h1 style="font-size: 3rem; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">{{ hackathon.title }}</h1>
+            </div>
+        </div>
+        
+        <div style="padding: 2rem; display: flex; gap: 2rem; flex-wrap: wrap;">
+            <div style="flex: 2; min-width: 300px;">
+                <h2 style="font-size: 1.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Description</h2>
+                <p style="margin-bottom: 2rem; line-height: 1.8;">{{ hackathon.description }}</p>
+                
+                <h2 style="font-size: 1.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Rules</h2>
+                <p style="margin-bottom: 2rem; line-height: 1.8;">{{ hackathon.rules }}</p>
+            </div>
+            
+            <div style="flex: 1; min-width: 250px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; height: fit-content;">
+                <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">Hackathon Info</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 1rem;"><strong style="display: block; color: var(--text-muted); font-size: 0.9rem;">Dates</strong> <i class="fa-regular fa-calendar"></i> {{ hackathon.start_date }} to {{ hackathon.end_date }}</li>
+                    <li style="margin-bottom: 1rem;"><strong style="display: block; color: var(--text-muted); font-size: 0.9rem;">Theme</strong> <span style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">{{ hackathon.theme }}</span></li>
+                    <li style="margin-bottom: 1.5rem;"><strong style="display: block; color: var(--text-muted); font-size: 0.9rem;">Prizes</strong> <span style="color: var(--secondary-color); font-weight: bold;">{{ hackathon.prize_info }}</span></li>
+                </ul>
+                {% if g.user %}
+                    <form action="{{ url_for('create_team', id=hackathon.id) }}" method="post" style="margin-top: 1rem;">
+                        <div class="form-group" style="margin-bottom: 0.5rem;">
+                            <input type="text" name="team_name" class="form-control" placeholder="Enter Team Name" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fa-solid fa-users" style="margin-right:0.5rem"></i> Create Team</button>
+                    </form>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Log in to Join</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
