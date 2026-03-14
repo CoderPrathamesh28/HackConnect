@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="auth-container mt-4" style="max-width: 600px; padding: 3rem;">
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <div style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)); display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 3rem; color: white;">
+            {{ current_user.name[0] | upper }}
+        </div>
+        <h1 class="auth-title mt-4" style="margin-bottom: 0.5rem;">{{ current_user.name }}</h1>
+        <p style="color: var(--text-muted);">{{ current_user.role | capitalize }}</p>
+    </div>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" name="name" id="name" class="form-control" value="{{ current_user.name }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="bio">Bio</label>
+            <textarea name="bio" id="bio" class="form-control" rows="4" placeholder="Tell us about yourself and the stacks you love...">{{ current_user.bio if current_user.bio else '' }}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="github">GitHub Link</label>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-brands fa-github fa-lg"></i>
+                <input type="url" name="github" id="github" class="form-control" value="{{ current_user.github if current_user.github else '' }}" placeholder="https://github.com/yourusername">
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;"><i class="fa-solid fa-floppy-disk" style="margin-right: 0.5rem;"></i> Save Profile</button>
+    </form>
+</div>
+{% endblock %}

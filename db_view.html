@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div style="margin-top: 2rem; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
+    <h1 style="font-size: 2.5rem;"><i class="fa-solid fa-database" style="color: var(--gradient-end);"></i> Database Viewer</h1>
+    <a href="{{ url_for('admin') }}" class="btn btn-primary">Back to Admin</a>
+</div>
+
+{% for table_name, rows in tables.items() %}
+<div style="margin-top: 3rem;">
+    <h2 style="font-size: 1.8rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; color: var(--primary-color);">{{ table_name }}</h2>
+    
+    <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow-x: auto;">
+        {% if rows %}
+            <table style="width: 100%; border-collapse: collapse; text-align: left; min-width: 600px;">
+                <thead style="background: var(--bg-color); border-bottom: 1px solid var(--border-color);">
+                    <tr>
+                        {% for key in rows[0].keys() %}
+                            <th style="padding: 1rem; color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase;">{{ key }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                        <tr style="border-bottom: 1px solid var(--border-color); transition: background-color 0.2s ease;" onmouseover="this.style.backgroundColor='var(--hover-bg)'" onmouseout="this.style.backgroundColor='transparent'">
+                            {% for key in row.keys() %}
+                                <td style="padding: 1rem; font-size: 0.95rem; max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    {% if row[key] == None %}
+                                        <span style="color: var(--text-muted); font-style: italic;">NULL</span>
+                                    {% else %}
+                                        {{ row[key] }}
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div style="padding: 2rem; text-align: center; color: var(--text-muted);">
+                <i class="fa-solid fa-folder-open" style="font-size: 2rem; margin-bottom: 1rem; display: block; opacity: 0.5;"></i>
+                <p>No records found in {{ table_name }} table.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
