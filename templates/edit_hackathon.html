@@ -16,6 +16,11 @@
             <textarea name="description" id="description" class="form-control" rows="5" required>{{ hackathon.description }}</textarea>
         </div>
 
+        <div class="form-group">
+            <label for="rules">Rules</label>
+            <textarea name="rules" id="rules" class="form-control" rows="4" required>{{ hackathon.rules if hackathon.rules else '' }}</textarea>
+        </div>
+
         <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
             <div class="form-group" style="flex: 1; min-width: 250px;">
                 <label for="start_date">Start Date</label>
@@ -33,8 +38,8 @@
         </div>
         
         <div class="form-group">
-            <label for="prizes">Prizes (Optional)</label>
-            <input type="text" name="prizes" id="prizes" class="form-control" value="{{ hackathon.prizes if hackathon.prizes else '' }}">
+            <label for="prizes">Prizes</label>
+            <input type="text" name="prizes" id="prizes" class="form-control" required value="{{ hackathon.prize_info if hackathon.prize_info else '' }}">
         </div>
 
         <div class="form-group">
