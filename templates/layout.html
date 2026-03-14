@@ -9,6 +9,26 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <div class="bg-animation" aria-hidden="true">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+        <div class="floating-shape shape-4"></div>
+        <div class="floating-shape shape-5"></div>
+    </div>
+    <div class="cursor-particle particle-1" aria-hidden="true"></div>
+    <div class="cursor-particle particle-2" aria-hidden="true"></div>
+    <div class="cursor-particle particle-3" aria-hidden="true"></div>
+    <div class="cursor-particle particle-4" aria-hidden="true"></div>
+    <div class="cursor-particle particle-5" aria-hidden="true"></div>
+    <div class="cursor-particle particle-6" aria-hidden="true"></div>
+    <div class="cursor-particle particle-7" aria-hidden="true"></div>
+    <div class="cursor-particle particle-8" aria-hidden="true"></div>
+    <div class="cursor-particle particle-9" aria-hidden="true"></div>
+    <div class="cursor-particle particle-10" aria-hidden="true"></div>
+    <div class="cursor-particle particle-11" aria-hidden="true"></div>
+    <div class="cursor-particle particle-12" aria-hidden="true"></div>
+
     <nav class="navbar">
         <div class="nav-brand">
             <a href="{{ url_for('index') }}"><i class="fa-solid fa-code"></i> HackConnect</a>
@@ -21,15 +41,15 @@
         </ul>
         <div class="nav-user">
             {% if g.user %}
-                <a href="{{ url_for('dashboard') }}" class="nav-links-link"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
-                <a href="{{ url_for('profile') }}" class="nav-links-link"><i class="fa-solid fa-user"></i> {{ g.user.name }}</a>
+                <a href="{{ url_for('dashboard') }}" class="btn btn-secondary"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
+                <a href="{{ url_for('profile') }}" class="btn btn-secondary"><i class="fa-solid fa-user"></i> {{ g.user.name }}</a>
                 {% if g.user.role in ['admin', 'organizer'] %}
-                    <a href="{{ url_for('admin') }}" class="nav-links-link"><i class="fa-solid fa-gauge"></i> Admin</a>
+                    <a href="{{ url_for('admin') }}" class="btn btn-secondary"><i class="fa-solid fa-gauge"></i> Admin</a>
                 {% endif %}
-                <a href="{{ url_for('logout') }}" class="btn" style="background:var(--border-color); color:var(--text-color);">Logout</a>
+                <a href="{{ url_for('logout') }}" class="btn btn-secondary">Logout</a>
             {% else %}
-                <a href="{{ url_for('login') }}" class="nav-links-link">Login</a>
-                <a href="{{ url_for('register') }}" class="btn btn-primary" style="width:auto;">Sign Up</a>
+                <a href="{{ url_for('login') }}" class="btn btn-secondary">Login</a>
+                <a href="{{ url_for('register') }}" class="btn btn-secondary" style="width:auto;">Sign Up</a>
             {% endif %}
         </div>
     </nav>
@@ -64,6 +84,47 @@
                 setTimeout(() => t.remove(), 300);
             });
         }, 5000);
+
+        // Custom Cursor Particles Effect
+        const particles = document.querySelectorAll('.cursor-particle');
+        let mouseX = 0, mouseY = 0;
+        let particlePositions = Array(particles.length).fill().map(() => ({ x: 0, y: 0 }));
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function updateParticles() {
+            particlePositions.forEach((pos, index) => {
+                const delay = (index + 1) * 0.03; // Stagger the trail more densely
+                pos.x += (mouseX - pos.x) * delay;
+                pos.y += (mouseY - pos.y) * delay;
+                particles[index].style.left = pos.x + 'px';
+                particles[index].style.top = pos.y + 'px';
+            });
+            requestAnimationFrame(updateParticles);
+        }
+        updateParticles();
+
+        // Particle hover effects
+        const interactiveElements = document.querySelectorAll('a, button, .btn, .card, .hackathon-card');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                particles.forEach(p => {
+                    p.style.transform = 'scale(1.8)';
+                    p.style.opacity = '1';
+                    p.style.boxShadow = '0 0 10px currentColor';
+                });
+            });
+            el.addEventListener('mouseleave', () => {
+                particles.forEach(p => {
+                    p.style.transform = 'scale(1)';
+                    p.style.opacity = '0.8';
+                    p.style.boxShadow = 'none';
+                });
+            });
+        });
     </script>
 </body>
 </html>

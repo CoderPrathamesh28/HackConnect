@@ -2,7 +2,7 @@
 
 {% block content %}
 <div style="margin-top: 2rem; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-    <h1 style="font-size: 2.5rem; background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">All Hackathons</h1>
+    <h1 class="gradient-text text-reveal">All Hackathons</h1>
     <div style="position: relative; width: 300px;">
         <i class="fa-solid fa-search" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
         <input type="text" id="searchInput" class="form-control" style="padding-left: 2.5rem; border-radius: 30px;" placeholder="Search hackathons...">
@@ -11,20 +11,20 @@
 
 <div id="hackathonGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
     {% for hackathon in hackathons %}
-        <div class="hackathon-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 20px rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-            <div style="height: 150px; background: linear-gradient(45deg, #238636, var(--card-bg)); position: relative;">
-                <span style="position: absolute; top: 1rem; right: 1rem; background: var(--bg-color); color: var(--text-color); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase;">{{ hackathon.status }}</span>
+        <div class="hackathon-card card fade-in-up" style="animation-delay: {{ loop.index * 0.1 }}s;">
+            <div class="card-header" style="height: 150px; background: linear-gradient(45deg, #238636, var(--card-bg)); position: relative;">
+                <span class="badge badge--status" style="position: absolute; top: 1rem; right: 1rem;">{{ hackathon.status }}</span>
             </div>
-            <div style="padding: 1.5rem;">
-                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">{{ hackathon.title }}</h3>
-                <p style="color: #8b949e; font-size: 0.9rem; margin-bottom: 1rem;"><i class="fa-regular fa-calendar" style="margin-right:0.5rem"></i>{{ hackathon.start_date }} - {{ hackathon.end_date }}</p>
+            <div class="card-body">
+                <h3 class="gradient-text">{{ hackathon.title }}</h3>
+                <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 1rem;"><i class="fa-regular fa-calendar" style="margin-right:0.5rem"></i>{{ hackathon.start_date }} - {{ hackathon.end_date }}</p>
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                    <span style="background: var(--bg-color); border: 1px solid var(--border-color); padding: 0.25rem 0.5rem; border-radius: 20px; font-size: 0.8rem;">{{ hackathon.theme }}</span>
+                    <span class="badge">{{ hackathon.theme }}</span>
                 </div>
                 <p style="margin-bottom: 1.5rem; opacity: 0.9;">{{ hackathon.description[:100] }}...</p>
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-weight: bold; color: var(--secondary-color);">{{ hackathon.prize_info }}</span>
-                    <a href="{{ url_for('hackathon_detail', id=hackathon.id) }}" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem; width: auto;">Details</a>
+                    <a href="{{ url_for('hackathon_detail', id=hackathon.id) }}" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem; width: auto;">Details</a>
                 </div>
             </div>
         </div>

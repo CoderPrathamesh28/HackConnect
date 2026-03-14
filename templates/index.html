@@ -27,7 +27,7 @@
                 <p style="margin-bottom: 1.5rem; opacity: 0.9;">{{ hackathon.description[:100] }}...</p>
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-weight: bold; color: var(--gradient-end);">{{ hackathon.prize_info }}</span>
-                    <a href="{{ url_for('hackathon_detail', id=hackathon.id) }}" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem; width: auto;">Details</a>
+                    <a href="{{ url_for('hackathon_detail', id=hackathon.id) }}" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem; width: auto;">Details</a>
                 </div>
             </div>
         </div>
