@@ -25,4 +25,4 @@ Follow these steps to set up the project locally:
 
 ### 1. Clone the Repository
 ```bash
-https://github.com/CoderPrathamesh28/Hackathon-Platform-.git
+https://github.com/CoderPrathamesh28/HackConnect
