@@ -5,9 +5,9 @@
     <h1 style="font-size: 3rem; margin-bottom: 1rem; background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Build The Future. Today.</h1>
     <p style="font-size: 1.25rem; color: var(--text-color); max-width: 600px; margin: 0 auto 2rem; opacity: 0.8;">Join thousands of developers worldwide to build innovative solutions, win prizes, and accelerate your career.</p>
     {% if not g.user %}
-        <a href="{{ url_for('register') }}" class="btn btn-gradient" style="padding: 1rem 2rem; font-size: 1.1rem; border-radius: 30px;">Get Started Free</a>
+        <a href="{{ url_for('register') }}" class="btn btn-gradient cta-button-outlined" style="padding: 1rem 2rem; font-size: 1.1rem; border-radius: 30px;">Get Started Free</a>
     {% else %}
-        <a href="#" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem; border-radius: 30px; width:auto;">View Dashboard</a>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary cta-button-outlined" style="padding: 1rem 2rem; font-size: 1.1rem; border-radius: 30px; width:auto;">View Dashboard</a>
     {% endif %}
 </div>
 

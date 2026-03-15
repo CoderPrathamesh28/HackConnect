@@ -31,10 +31,10 @@
                         <div class="form-group" style="margin-bottom: 0.5rem;">
                             <input type="text" name="team_name" class="form-control" placeholder="Enter Team Name" required>
                         </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fa-solid fa-users" style="margin-right:0.5rem"></i> Create Team</button>
+                        <button type="submit" class="btn btn-secondary" style="width: 100%; padding: 0.5rem 1rem; font-size: 0.9rem;"><i class="fa-solid fa-users" style="margin-right:0.5rem"></i> Create Team</button>
                     </form>
                 {% else %}
-                    <a href="{{ url_for('login') }}" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Log in to Join</a>
+                    <a href="{{ url_for('login') }}" class="btn btn-secondary" style="width: 100%; margin-top: 1rem; display: inline-block; padding: 0.5rem 1rem; font-size: 0.9rem;">Log in to Join</a>
                 {% endif %}
             </div>
         </div>

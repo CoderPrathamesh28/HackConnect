@@ -9,11 +9,11 @@
     </div>
 </div>
 
-<div id="hackathonGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+<div id="hackathonGrid">
     {% for hackathon in hackathons %}
         <div class="hackathon-card card fade-in-up" style="animation-delay: {{ loop.index * 0.1 }}s;">
-            <div class="card-header" style="height: 150px; background: linear-gradient(45deg, #238636, var(--card-bg)); position: relative;">
-                <span class="badge badge--status" style="position: absolute; top: 1rem; right: 1rem;">{{ hackathon.status }}</span>
+            <div class="card-header">
+                <span class="badge badge--status">{{ hackathon.status }}</span>
             </div>
             <div class="card-body">
                 <h3 class="gradient-text">{{ hackathon.title }}</h3>

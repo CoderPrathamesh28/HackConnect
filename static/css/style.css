@@ -75,6 +75,21 @@ body {
     gap: 1rem;
 }
 
+/* User profile button with outline animation when logged in */
+.nav-user .btn:nth-child(2) {
+    animation: outlinePulse 2s ease-in-out infinite;
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+@keyframes outlinePulse {
+    0%, 100% {
+        box-shadow: 0 0 0 2px var(--primary-color), 0 0 10px rgba(59, 130, 246, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 0 2px var(--primary-color), 0 0 20px rgba(59, 130, 246, 0.6);
+    }
+}
+
 /* Container */
 .container {
     flex: 1;
@@ -263,6 +278,28 @@ body {
     transform: translateY(-2px);
 }
 
+/* CTA Button Outline Animation */
+.cta-button-outlined {
+    color: white !important;
+    box-shadow: 0 0 0 2px white, 0 0 15px rgba(139, 92, 246, 0.6);
+    animation: ctaOutlinePulse 2s ease-in-out infinite;
+    border-color: white !important;
+}
+
+.cta-button-outlined:hover {
+    color: white !important;
+    box-shadow: 0 0 0 3px white, 0 0 30px rgba(139, 92, 246, 0.9);
+}
+
+@keyframes ctaOutlinePulse {
+    0%, 100% {
+        box-shadow: 0 0 0 2px white, 0 0 15px rgba(139, 92, 246, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 0 3px white, 0 0 30px rgba(139, 92, 246, 0.9);
+    }
+}
+
 /* Footer */
 footer {
     text-align: center;
@@ -368,6 +405,24 @@ body {
     opacity: 0.1;
     pointer-events: none;
     animation: float 20s ease-in-out infinite;
+}
+
+#hackathonGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.hackathon-card .card-header {
+    height: 150px;
+    background: linear-gradient(45deg, #238636, var(--card-bg));
+    position: relative;
+}
+
+.hackathon-card .badge--status {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
 }
 
 .shape-1 {

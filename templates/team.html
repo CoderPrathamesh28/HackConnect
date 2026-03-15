@@ -50,7 +50,9 @@
                     <input type="url" name="demo_video" id="demo_video" class="form-control" value="{{ submission.demo_video if submission else '' }}" placeholder="YouTube, Loom, etc.">
                 </div>
                 
-                <button type="submit" class="btn btn-primary" style="width: auto;"><i class="fa-solid fa-cloud-arrow-up" style="margin-right: 0.5rem;"></i> {% if submission %}Update Submission{% else %}Submit Project{% endif %}</button>
+                <div style="text-align: center;">
+                    <button type="submit" class="btn btn-primary" style="width: auto;"><i class="fa-solid fa-cloud-arrow-up" style="margin-right: 0.5rem;"></i> {% if submission %}Update Submission{% else %}Submit Project{% endif %}</button>
+                </div>
             </form>
         </div>
     </div>

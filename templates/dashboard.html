@@ -19,7 +19,7 @@
                                 <h4 style="margin-bottom: 0.25rem;">{{ team.team_name }}</h4>
                                 <p style="font-size: 0.85rem; color: var(--text-muted);">{{ team.hackathon_title }}</p>
                             </div>
-                            <a href="{{ url_for('team_detail', team_id=team.team_id) }}" class="btn btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; width:auto;">View Team</a>
+                            <a href="{{ url_for('team_detail', team_id=team.team_id) }}" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem; width:auto;">View Team</a>
                         </li>
                     {% endfor %}
                 </ul>
