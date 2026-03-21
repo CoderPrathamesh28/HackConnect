@@ -1,5 +1,9 @@
 import sqlite3
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from flask import Flask, render_template, request, url_for, flash, redirect, session, g
 from werkzeug.security import generate_password_hash, check_password_hash
 import smtplib
